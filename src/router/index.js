@@ -21,9 +21,7 @@ import DetailMember from '../components/Member/Detail.vue'
 
 //paket
 import IndexPaket from '../components/Paket/Index.vue'
-import TambahPaket from '../components/Paket/Tambah.vue'
 import EditPaket from '../components/Paket/Edit.vue'
-import DetailPaket from '../components/Paket/Detail.vue'
 
 //transaksi
 import IndexTransaksi from '../components/Transaksi/Index.vue'
@@ -135,14 +133,14 @@ const routes = [
             requiresAuth : true
         }
     },
-    {
-        path: '/paket/tambah',
-        name: 'tambahpaket',
-        component: TambahPaket,
-        meta : {
-            requiresAuth : true
-        }
-    },
+    // {
+    //     path: '/paket/tambah',
+    //     name: 'tambahpaket',
+    //     component: TambahPaket,
+    //     meta : {
+    //         requiresAuth : true
+    //     }
+    // },
     {
         path: '/paket/edit/:id',
         name: 'editpaket',
@@ -151,14 +149,14 @@ const routes = [
             requiresAuth : true
         }
     },
-    {
-        path: '/paket/detail/:id',
-        name: 'detailpaket',
-        component: DetailPaket,
-        meta : {
-            requiresAuth : true
-        }
-    },
+    // {
+    //     path: '/paket/detail/:id',
+    //     name: 'detailpaket',
+    //     component: DetailPaket,
+    //     meta : {
+    //         requiresAuth : true
+    //     }
+    // },
     {
         path: '/transaksi',
         name: 'indextransaksi',
