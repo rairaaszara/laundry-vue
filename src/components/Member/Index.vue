@@ -87,12 +87,12 @@ export default {
     },
     methods : {
     hapus(id_member) {
-    this.axios.delete(`http://localhost/api-laundry/public/api/member/${id}`,
+    this.axios.delete(`http://localhost/api-laundry/public/api/member/${id_member}`,
     {
         headers : { Authorization : 'Bearer ' + this.$store.state.token}
     })
     .then(() => {
-        let i = this.member.map(item => item.id_member).indexOf(id)
+        let i = this.member.map(item => item.id_member).indexOf(id_member)
         this.member.splice(i, 1)
     });
 },

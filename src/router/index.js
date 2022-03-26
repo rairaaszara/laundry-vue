@@ -184,7 +184,7 @@ const routes = [
     {
         path: '/transaksi/detail/:id',
         name: 'detailtransaksi',
-        component: EditTransaksi,
+        component: DetailTransaksi,
         meta : {
             requiresAuth : true
         }
