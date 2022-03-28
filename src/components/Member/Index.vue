@@ -40,7 +40,7 @@
 <i class="far fa-eye"></i>
 </router-link>
 <router-link :to="{ name : 'editmember' , params : {id : m.id_member }}" class="btn btn-warning btn-circle">
-<i class="far fa-pen"></i>
+<i class="fas fa-pen"></i>
 </router-link>
 <button type="button" @click="hapus(m.id_member)" class="btn btn-danger btn-circle">
 <i class="fas fa-trash"></i>
@@ -77,17 +77,17 @@ export default {
             this.$swal("Error","Anda tidak dapat mengakses halaman ini","error")
             this.$router.push('/')
         }
-    this.axios.get('http://localhost/api-laundry/public/api/member',
+    this.axios.get('http://localhost:8000/api/member',
     {
         headers : { Authorization : 'Bearer ' + this.$store.state.token}
     })
     .then( res => {
-        this.member = res.data
+        this.member = res.data.data.member
     })
     },
     methods : {
     hapus(id_member) {
-    this.axios.delete(`http://localhost/api-laundry/public/api/member/${id_member}`,
+    this.axios.delete(`http://localhost:8000/api/member/${id_member}`,
     {
         headers : { Authorization : 'Bearer ' + this.$store.state.token}
     })

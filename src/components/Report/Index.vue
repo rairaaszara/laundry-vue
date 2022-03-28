@@ -31,7 +31,7 @@
 <option value="2020">2020</option>
 <option value="2021">2021</option>
 <option value="2022">2022</option>
-<select>
+</select>
 <button type="submit" class="btn btn-sm btn-info">Tampilkan</button>
 </form>
 <div class="report">
@@ -67,8 +67,8 @@
     <tr v-for="(t, index) in transaksi" :key="index">
     <td>{{ index + 1 }}</td>
     <td>{{ t.nama }}</td>
-    <td>{{ t.tgl_order | moment("DD/MM/YYYY") }}</td>
-    <td>{{ t.tgl_bayar | moment("DD/MM/YYYY") }}</td>
+    <td>{{ t.tanggal | moment("DD/MM/YYYY") }}</td>
+    <td>{{ t.tanggal_bayar | moment("DD/MM/YYYY") }}</td>
     <td>Rp {{ t.total_bayar }}</td>
     </tr>
     </tbody>
@@ -144,7 +144,7 @@ created() {
 },
 methods : {
 tampil() {
-    this.axios.post('http://localhost:81/api-laundry/public/api/report',
+    this.axios.post('http://localhost:8000/api/report',
                      this.report,
                      {headers : {'Authorization' : ' Bearer ' + this.$store.state.token} })
                      .then(res => {

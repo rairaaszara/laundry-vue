@@ -27,17 +27,17 @@
 <label>Jenis Kelamin</label>
 </div>
 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-<label v-if="member.jenis_kelamin == 'Laki-laki'" class="btn btn-secondary active">
-<input type="radio" value="Laki-laki" v-model="member.jenis_kelamin" checked> Laki-laki
+<label v-if="member.jenis_kelamin == 'pria'" class="btn btn-secondary active">
+<input type="radio" value="pria" v-model="member.jenis_kelamin" checked> Pria
 </label>
 <label v-else class="btn btn-secondary">
-<input type="radio" value="Laki-laki" v-model="member.jenis_kelamin"> Laki-laki
+<input type="radio" value="pria" v-model="member.jenis_kelamin"> Pria
 </label>
-<label v-if="member.jenis_kelamin == 'Perempuan'" class="btn btn-secondary active">
-<input type="radio" value="Perempuan" v-model="member.jenis_kelamin"> Perempuan
+<label v-if="member.jenis_kelamin == 'wanita'" class="btn btn-secondary active">
+<input type="radio" value="wanita" v-model="member.jenis_kelamin"> Wanita
 </label>
 <label v-else class="btn btn-secondary">
-<input type="radio" value="Perempuan" v-model="member.jenis_kelamin"> Perempuan
+<input type="radio" value="wanita" v-model="member.jenis_kelamin"> Wanita
 </label>
 </div>
 </div>
@@ -75,15 +75,15 @@ export default {
             this.$router.push('/')
         }
 
-    this.axios.get(`http://localhost/api-laundry/public/api/member/${this.$route.params.id}`,
+    this.axios.get(`http://localhost:8000/api/member/${this.$route.params.id}`,
     { headers : {Authorization : 'Bearer ' + this.$store.state.token } })
     .then((res) => {
-        this.member = res.data
+        this.member = res.data.data.member
     })
 },
 methods : {
 edit() {
-    this.axios.put(`http://localhost/api-laundry/public/api/member/${this.$route.params.id}`,
+    this.axios.put(`http://localhost:8000/api/member/${this.$route.params.id}`,
     this.member,
     {headers : {Authorization : 'Bearer ' + this.$store.state.token } })
     .then(() => {
@@ -92,5 +92,5 @@ edit() {
     .catch(err => console.log(err))
 },
 },
-}
+};
 </script>

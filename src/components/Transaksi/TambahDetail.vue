@@ -16,12 +16,12 @@
 <div class="form-group">
 <label>Jenis Paket</label>
 <select class="form-control" v-model="detail.id_paket">
-<option v-for="(p, index) in paket" :key="index" :value="p.id">{{ p.jenis }}</option>
+<option v-for="(p, index) in paket" :key="index" :value="p.id_paket">{{ p.jenis }}</option>
 </select>
 </div>
 <div class="form-group">
 <label>Jumlah (kg / satuan></label>
-<input type="text" class="form-control" v-model="detail.quantity">
+<input type="text" class="form-control" v-model="detail.qty">
 </div>
 <input type="hidden" v-model="detail.id_transaksi">
 <button type="submit" class="btn btn-success btn-block">Simpan</button>
@@ -55,16 +55,16 @@ export default {
             this.$swal("Error","Anda tidak dapat mengakses halaman ini","error")
             this.$router.push('/')
         }
-    this.axios.get('http://localhost:81/api-laundry/public/api/paket', { headers : { 'Athorization' : `Bearer ` + this.$store.state.token} })
+    this.axios.get('http://localhost:8000/api/paket', { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} })
     .then( (res) => {
-        this.paket = res.data.data
+        this.paket = res.data.data.paket
         this.detail.id_transaksi = this.id_transaksi
     })
     .catch(err => console.log(err))
     },
     methods : {
     tambah() {
-        this.axios.post('http://localhost:81/api-laundry/public/api/transaksi/detail/tambah',
+        this.axios.post('http://localhost:8000/api/transaksi/detail/tambah',
         this.detail,
         { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} })
         .then( () => {

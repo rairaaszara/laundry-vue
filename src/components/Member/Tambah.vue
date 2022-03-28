@@ -28,10 +28,10 @@
 </div>
 <div class="btn-group btn-group-toggle" data-toggle="buttons">
 <label class="btn btn-secondary">
-<input type="radio" value="Laki-laki" v-model="member.jenis_kelamin"> Laki-laki
+<input type="radio" value="pria" v-model="member.jenis_kelamin"> Pria
 </label>
 <label class="btn btn-secondary">
-<input type="radio" value="Perempuan" v-model="member.jenis_kelamin"> Perempuan
+<input type="radio" value="wanita" v-model="member.jenis_kelamin"> Wanita
 </label>
 </div>
 </div>
@@ -59,9 +59,26 @@ export default {
             member : {}
         }
     }, 
+    created() {
+        var data = JSON.parse(this.$store.state.datauser)
+        var role = data.role
+
+        if(role == 'owner')
+        {
+            this.$swal("Error","Anda tidak dapat mengakses halaman ini","error")
+            this.$router.push('/')
+        }
+
+        
+    this.axios.get(`http://localhost:8000/api/member/${this.$route.params.id}`,
+    { headers : {Authorization : 'Bearer ' + this.$store.state.token } })
+    .then((res) => {
+        this.member = res.data.data.member
+    })
+},
     methods : {
     tambah() {
-    this.axios.post('http://localhost/api-laundry/public/api/member/',
+    this.axios.post('http://localhost:8000/api/member',
     this.member,
     { headers : { Authorization : `Bearer ` + this.$store.state.token} })
     .then((res) => {

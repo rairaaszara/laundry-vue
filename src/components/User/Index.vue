@@ -69,7 +69,7 @@ export default {
             this.$router.push('/') 
         }
         
-        this.axios.get('/user', { headers : { 'Authorization' : 'Bearer ' + this.$store.state.token} })
+        this.axios.get('http://localhost:8000/api/user', { headers : { 'Authorization' : 'Bearer ' + this.$store.state.token} })
                   .then(res => {
                       this.user = res.data
                   })
@@ -77,7 +77,7 @@ export default {
     },
     methods : {
         hapus(id) {
-            this.axios.delete(`/user/${id}`, { headers : { 'Authorization' : 'Bearer ' + this.$store.state.token} })
+            this.axios.delete(`http://localhost:8000/api/user/${id}`, { headers : { 'Authorization' : 'Bearer ' + this.$store.state.token} })
                       .then(() => {
                           let i = this.user.map(item => item.id).indexOf(id);
                           this.user.splice(i, 1)

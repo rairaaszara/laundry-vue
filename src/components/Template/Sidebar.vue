@@ -6,7 +6,7 @@ accordion" id="accordionSidebar">
 <a class="sidebar-brand d-flex align-items-center justify-content-
 center" href="index.html">
 
-<div class="sidebar-brand-text mx-3">Laundry Online</div>
+<div class="sidebar-brand-text mx-3">Laundry Smurf</div>
 </a>
 <!-- Divider -->
 <hr class="sidebar-divider my-0">
@@ -19,11 +19,25 @@ center" href="index.html">
 </router-link>
 </li>
 
+<li v-if="isAdmin" class="nav-item">
+<router-link class="nav-link" to="/user">
+<i class="fas fa-user"></i>
+<span>User</span>
+</router-link>                
+</li>
+
 <li v-if="isAdmin || isKasir" class="nav-item">
 <router-link to="/member" class="nav-link" href="index.html">
 <i class="fas fa-users"></i>
 <span>Member</span>
 </router-link>
+</li>
+
+<li v-if="isAdmin" class="nav-item">
+<router-link to="/outlet" class="nav-link">
+<i class="fas fa-store"></i>
+<span>Outlet</span>
+</router-link>             
 </li>
 
 <li v-if="isAdmin" class="nav-item">
@@ -40,7 +54,7 @@ center" href="index.html">
 </router-link>
 </li>
 
-<li v-if="isOwner" class="nav-item">
+<li class="nav-item">
 <router-link class="nav-link" to="/report">
 <i class="far fa-file-alt"></i>
 <span>Report</span>

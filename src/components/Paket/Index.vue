@@ -11,12 +11,6 @@
 <div class="card shadow mb-4">
 <div class="card-body">
 <div class="table-responsive">
-<router-link to="/member/tambah" class="btn btn-info btn-icon-split">
-<span class="icon text-white-50">
-<i class="fas fa-plus"></i>
-</span>
-<span class="text">Tambah</span>
-</router-link>
 <table class="table table-bordered mt-3" width="100%" cellspacing="0">
 <thead>
 <tr>
@@ -33,10 +27,7 @@
 <td>{{ "Rp " + p.harga }}</td>
 <td>
 <router-link :to="{ name : 'editpaket' , params : {id : p.id_paket }}" class="btn btn-warning btn-circle">
-<i class="far fa-pen"></i>
-</router-link>
-<router-link :to="{ name : 'detailpaket' , params : {id : p.id_paket }}" class="btn btn-warning btn-circle">
-<i class="far fa-pen"></i>
+<i class="fas fa-pen"></i>
 </router-link>
 <button type="button" @click="hapus(p.id_paket)" class="btn btn-danger btn-circle">
 <i class="fas fa-trash"></i>
@@ -73,17 +64,17 @@ export default {
             this.$swal("Error","Anda tidak dapat mengakses halaman ini","error")
             this.$router.push('/')
         }
-    this.axios.get('http://localhost/api-laundry/public/api/paket',
+    this.axios.get('http://localhost:8000/api/paket',
     {
         headers : { Authorization : 'Bearer ' + this.$store.state.token}
     })
     .then(res => {
-        this.paket = res.data
+        this.paket = res.data.data.paket
     })
     },
     methods : {
     hapus(id_paket) {
-    this.axios.delete(`http://localhost/api-laundry/public/api/paket/${id_paket}`,
+    this.axios.delete(`http://localhost:8000/api/paket/${id_paket}`,
     {
         headers : { Authorization : 'Bearer ' + this.$store.state.token}
     })

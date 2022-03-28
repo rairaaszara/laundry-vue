@@ -17,7 +17,7 @@
 <form @submit.prevent="edit">
 <div class="form-group">
 <label>Jenis</label>
-<input type="text" class="form-control" v-model="paket.jenis">
+<input type="text" class="form-control" v-model="paket.jenis" readonly>
 </div>
 <div class="form-group">
 <label>Harga</label>
@@ -55,15 +55,15 @@ export default {
             this.$swal("Error","Anda tidak dapat mengakses halaman ini","error")
             this.$router.push('/')
         }
-    this.axios.get(`http://localhost/api-laundry/public/api/paket/${this.$route.params.id}`,
+    this.axios.get(`http://localhost:8000/api/paket/${this.$route.params.id}`,
     { headers : { Authorization : 'Bearer ' + this.$store.state.token} })
     .then((res) => {
-        this.paket = res.data
+        this.paket = res.data.data.paket
     })
 },
 methods : {
 edit() {
-    this.axios.put(`http://localhost/api-laundry/public/api/paket/${this.$route.params.id}`,
+    this.axios.put(`http://localhost:8000/api/paket/${this.$route.params.id}`,
     this.paket,
     {headers : {Authorization : 'Bearer ' + this.$store.state.token}})
     .then(() => {

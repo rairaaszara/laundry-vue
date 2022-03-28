@@ -28,6 +28,9 @@ import IndexTransaksi from '../components/Transaksi/Index.vue'
 import TambahTransaksi from '../components/Transaksi/Tambah.vue'
 import EditTransaksi from '../components/Transaksi/Edit.vue'
 import DetailTransaksi from '../components/Transaksi/Detail.vue'
+import TambahDetail from '../components/Transaksi/TambahDetail.vue'
+
+import IndexReport from '../components/Report/Index.vue'
 
 Vue.use(VueRouter)
 
@@ -189,6 +192,22 @@ const routes = [
             requiresAuth : true
         }
     },
+    {
+        path: '/transaksi/detail/:id',
+        name: 'tambahdetail',
+        component: TambahDetail,
+        meta : {
+            requiresAuth : true
+        }
+    },
+    {
+        path: '/report',
+        name: 'indexreport',
+        component: IndexReport,
+        meta : {
+            requiresAuth : true
+        }
+    }
     ]
    
     const router = new VueRouter({

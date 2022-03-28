@@ -35,16 +35,16 @@
 <td>{{ t.tanggal | moment("DD/MM/YYYY") }}</td>
 <td>
 <span v-if="t.status == 'baru'" class="badge bg-info text-light">Baru</span>
-<span v-if="t.status == 'proses'" class="badge bg-info text-light">Proses</span>
-<span v-if="t.status == 'selesai'" class="badge bg-info text-light">Selesai</span>
-<span v-if="t.status == 'diambil'" class="badge bg-info text-light">Diambil</span>
+<span v-if="t.status == 'proses'" class="badge bg-warning text-dark">Proses</span>
+<span v-if="t.status == 'selesai'" class="badge bg-success text-light">Selesai</span>
+<span v-if="t.status == 'diambil'" class="badge bg-secondary text-light">Diambil</span>
 </td>
 <td>
-<router-link class="btn btn-success btn-circle mr-1" :to="{ name : 'detailtransaksi', params : {id : t.id}}">
+<router-link class="btn btn-success btn-circle mr-1" :to="{ name : 'detailtransaksi', params : {id : t.id_transaksi}}">
 <i class="far fa-eye"></i>
 </router-link>
-<router-link class="btn btn-warning btn-circle mr-1" :to="{ name : 'edittransaksi', params : {id : t.id}}">
-<i class="far fa-eye"></i>
+<router-link class="btn btn-warning btn-circle mr-1" :to="{ name : 'edittransaksi', params : {id : t.id_transaksi}}">
+<i class="fas fa-pen"></i>
 </router-link>
 </td>
 </tr>
@@ -79,9 +79,9 @@ export default {
                 this.$router.push('/')
             }
 
-    this.axios.get('http://localhost/api-laundry/public/api/transaksi', {headers : { Authorization : 'Bearer ' + this.$store.state.token}})
+    this.axios.get('http://localhost:8000/api/transaksi', {headers : { Authorization : 'Bearer ' + this.$store.state.token}})
     .then(res => {
-        this.transaksi = res.data.data
+        this.transaksi = res.data
     })
 
 

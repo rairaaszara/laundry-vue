@@ -57,10 +57,10 @@ export default {
             this.$swal("Error","Anda tidak dapat mengakses halaman ini","error")
             this.$router.push('/')
         }
-    this.axios.get(`http://localhost/api-laundry/public/api/member/${this.$route.params.id}`,
+    this.axios.get(`http://localhost:8000/api/member/${this.$route.params.id}`,
     { headers : {Authorization : 'Bearer ' + this.$store.state.token } })
     .then( (res) => {
-        this.member = res.data
+        this.member = res.data.data.member
     })
     .catch(err => console.log(err))
 },

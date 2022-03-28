@@ -16,7 +16,7 @@
 <div class="form-group">
 <label>Member</label>
 <select v-model="transaksi.id_member" class="form-control">
-<option v-for="(m, index) in member" :key="index" :value="m.id">
+<option v-for="(m, index) in member" :key="index" :value="m.id_member">
 {{ m.nama }}
 </option>
 </select>
@@ -51,15 +51,16 @@ export default {
             this.$swal("Error","Anda tidak dapat mengakses halaman ini","error")
             this.$router.push('/')
         }
-    this.axios.get('http://localhost:81/api-laundry/public/api/member', {headers : { Authorization : 'Bearer ' + this.$store.state.token}} )
+    this.axios.get('http://localhost:8000/api/member', {headers : { Authorization : 'Bearer ' + this.$store.state.token}} )
     .then( (res) => {
-        this.member = res.data
+        console.log(res.data.data.member)
+        this.member = res.data.data.member
     })
     .catch(err => console.log(err))
     },
     methods : {
     tambah() {
-        this.axios.post('http://localhost:81/api-laundry/public/api/transaksi',
+        this.axios.post('http://localhost:8000/api/transaksi',
         this.transaksi,
         {headers : {Authorization : 'Bearer ' + this.$store.state.token}} )
         .then( (res) => {

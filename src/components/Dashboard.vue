@@ -103,7 +103,7 @@ export default {
         var data = JSON.parse(this.$store.state.datauser)
         this.name = data.name
         
-        this.axios.get('/dashboard', { headers : { 'Authorization' : 'Bearer ' + this.$store.state.token} })
+        this.axios.get('http://localhost:8000/api/dashboard', { headers : { 'Authorization' : 'Bearer ' + this.$store.state.token} })
              .then(res => {
                  this.data = res.data
              })

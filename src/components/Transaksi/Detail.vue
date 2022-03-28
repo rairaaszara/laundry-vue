@@ -29,7 +29,7 @@
 <div v-if="transaksi.tgl_bayar == null" class="h6 mb-0 font-weight-bold text-gray-800 mb-2">-</div>
 <div v-else class="h6 mb-0 font-weight-bold text-gray-800 mb-2">{{ transaksi.tanggal_bayar | moment("DD/MM/YYYY") }}</div>
 <div class="text-xs font-weight-bold text-primary text-uppercase">Status Pembayaran</div>
-<div v-if="transaksi.dibayar == 'belum dibayar'" class="h6 mb-0 font-weight-bold text-gray-800 mb-2">Belum dibayar</div>
+<div v-if="transaksi.dibayar == 'belum_dibayar'" class="h6 mb-0 font-weight-bold text-gray-800 mb-2">Belum dibayar</div>
 <div v-else class="h6 mb-0 font-weight-bold text-gray-800 mb-2">Sudah dibayar</div>
 </div>
 </div>
@@ -62,9 +62,9 @@
 </thead>
 <tbody>
 <tr v-for="(d, index) in detail" :key="index">
-    <td>{{ inde + 1 }}</td>
+    <td>{{ index + 1 }}</td>
     <td>{{ d.jenis }}</td>
-    <td>{{ d.quantity }}</td>
+    <td>{{ d.qty }}</td>
     <td>Rp {{ d.subtotal }}</td>
 </tr>
 <tr v-if="total != ''">
@@ -109,20 +109,20 @@ export default {
             this.$swal("Error","Anda tidak dapat mengakses halaman ini","error")
             this.$router.push('/')
         }
-    this.axios.get(`http://localhost:81/api-laundry/public/api/transaksi/${this.id_transaksi}`,
+    this.axios.get(`http://localhost:8000/api/transaksi/${this.id_transaksi}`,
                   { headers : { 'Authorization' : `Bearer` + this.$store.state.token} })
                 .then((res) => {
                     this.transaksi = res.data
                     })
                     .catch(err => console.log(err))
-    this.axios.get(`http://localhost:81/api-laundry/public/api/transaksi/detail/${this.id_transaksi}`,
+    this.axios.get(`http://localhost:8000/api/transaksi/detail/${this.id_transaksi}`,
                   { headers : { 'Authorization' : `Bearer` + this.$store.state.token} })
               .then((res) => {
                   this.detail = res.data
               }) 
               .catch(err => console.log(err))      
-    this.axios.get(`http://localhost:81/api-laundry/public/api/transaksi/total/${this.id_transaksi}`,
-                  { headers : { 'Athorization' : `Bearer` + this.$store.state.token} })
+    this.axios.get(`http://localhost:8000/api/transaksi/total/${this.id_transaksi}`,
+                  { headers : { 'Authorization' : `Bearer` + this.$store.state.token} })
               .then(res => {
                   this.total = res.data.total
               })                       
@@ -149,7 +149,7 @@ export default {
         if (this.transaksi.status == 'baru') { this.transaksi.status = 'proses'}
         else { this.transaksi.status = 'selesai' }
 
-        this.axios.post(`localhost:81/api-laundry/public/api/transaksi/status/${this.id_transaksi}`,
+        this.axios.post(`http://localhost:8000/api/transaksi/status/${this.id_transaksi}`,
                          this.transaksi,
                          { headers : { 'Authorization' : `Bearer` + this.$store.state.token} })
             .then(  () => {
@@ -158,7 +158,7 @@ export default {
             .catch(err => console.log(err))
     },
     bayar() {
-    this.axios.post(`http://localhost:81/api-laundry/public/api/transaksi/bayar/${this.id_transaksi}`,
+    this.axios.post(`http://localhost:8000/api/transaksi/bayar/${this.id_transaksi}`,
                          this.transaksi,
                          { headers : { 'Authorization' : `Bearer` + this.$store.state.token} })
             .then(  () => {
