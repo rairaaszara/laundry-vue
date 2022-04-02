@@ -10,7 +10,7 @@
                         <div class="col-lg-8">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Tambah Data User</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Edit Data User</h6>
                                 </div>
                                 <div class="card-body">
                                     <form @submit.prevent="edit">
@@ -37,7 +37,7 @@
                                         <div class="form-group">
                                             <label>Outlet</label>
                                             <select class="form-control" v-model="user.id_outlet">
-                                                <option v-for="(o, index) in outlet" :key="index" :value="o.id">{{ o.nama }}</option>
+                                                <option v-for="(o, index) in outlet" :key="index" :value="o.id_outlet">{{ o.nama_outlet }}</option>
                                             </select>                                            
                                         </div>
                                         <button type="submit" class="btn btn-success btn-block">Simpan</button>
@@ -70,20 +70,25 @@ export default {
             this.$router.push('/') 
         }
         
-        this.axios.get(`/user/${this.$route.params.id}`, { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} })
-                  .then(res => {
-                      this.user = res.data
+        this.axios.get(`http://localhost:8000/api/user/${this.$route.params.id}`, 
+        { headers : {Authorization : 'Bearer ' + this.$store.state.token} })
+                  .then((res) => {
+                      console.log(res.data.data)
+                      this.user = res.data.data
                   })
                   .catch(err => console.log(err))
-        this.axios.get('/outlet', { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} })
+        this.axios.get('http://localhost:8000/api/outlet', 
+        { headers : {Authorization : 'Bearer ' + this.$store.state.token} })
                   .then(res => {
-                      this.outlet = res.data
+                      this.outlet = res.data.data
                   })
                   .catch(err => console.log(err))
     },
     methods : {
         edit() {
-            this.axios.put(`/user/${this.$route.params.id}`, this.user, { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} })
+            this.axios.put(`http://localhost:8000/api/user/${this.$route.params.id}`,
+            this.user,
+            { headers : {Authorization : 'Bearer ' + this.$store.state.token} })
                       .then( () => {
                           this.$router.push('/user');
                       })

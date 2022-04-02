@@ -15,7 +15,7 @@
 <form @submit.prevent="edit">
 <div class="form-group">
 <label>Nama Outlet</label>
-<input type="text" class="form-control" v-model="outlet.nama">
+<input type="text" class="form-control" v-model="outlet.nama_outlet">
 </div>
 <div class="form-group">
 <label>Alamat</label>
@@ -49,15 +49,14 @@ export default {
             this.$swal("Anda tidak dapat mengakses halaman ini")
             this.$router.push('/') 
         }
-        this.axios.get(`/outlet/${this.$route.params.id}`, { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} })
+        this.axios.get(`http://localhost:8000/api/outlet/${this.$route.params.id}`, { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} })
              .then( (res) => {
                 this.outlet = res.data.data
              })
-             .catch(err => console.log(err))
     },
     methods : {
         edit() {
-            this.axios.put(`/outlet/${this.$route.params.id}`, this.outlet, { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} } )
+            this.axios.put(`http://localhost:8000/api/outlet/${this.$route.params.id}`, this.outlet, { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} } )
                       .then(() => {
                           this.$router.push('/outlet')
                       })

@@ -51,8 +51,8 @@
 
     <section slot="pdf-content">
     <h1>Report Transaksi</h1>
-    <h3>Laundry Online</h3>
-    <h5>Jalan Danau Ranau No.1, Malang</h5>
+    <h3>{{ outlet.nama_outlet }}</h3>
+    <h5>{{ outlet.alamat }}</h5>
     <table>
     <thead>
     <tr>
@@ -61,6 +61,7 @@
     <th>Tanggal Transaksi</th>
     <th>Tanggal Pembayaran</th>
     <th>Nominal Pembayaran</th>
+    <th>Petugas</th>
     </tr>
     </thead>
     <tbody>
@@ -70,6 +71,7 @@
     <td>{{ t.tanggal | moment("DD/MM/YYYY") }}</td>
     <td>{{ t.tanggal_bayar | moment("DD/MM/YYYY") }}</td>
     <td>Rp {{ t.total_bayar }}</td>
+    <td>{{ t.name }}</td>
     </tr>
     </tbody>
     </table>
@@ -84,6 +86,7 @@
 </div>
 </div>
 </template>
+
 <style scoped>
 h1,h3,h5 { text-align : center; }
 .report {
@@ -134,10 +137,15 @@ export default {
     data() {
     return {
         report : {},
-        transaksi : {}
+        transaksi : {},
+        outlet : {},
     }
 },
 created() {
+    var data = JSON.parse(this.$store.state.dataoutlet)
+    this.outlet = data
+
+
     var date = new Date()
     this.report.tahun = date.getFullYear()
     this.report.bulan = ("0" + (date.getMonth() + 1)).slice(-2)

@@ -21,7 +21,7 @@
 <thead>
 <tr>
 <th>#</th>
-<th>Nama</th>
+<th>Nama Outlet</th>
 <th>Alamat</th>
 <th>Aksi</th>
 </tr>
@@ -29,11 +29,11 @@
 <tbody>
 <tr v-for="(o, index) in outlet" :key="index">
 <td>{{ index + 1 }}</td>
-<td>{{ o.nama }}</td>
+<td>{{ o.nama_outlet }}</td>
 <td>{{ o.alamat }}</td>
 <td>
-<router-link class="btn btn-warning btn-circle" :to="{ name : 'editoutlet' , params : { id : o.id } }"><i class="fas fa-pen"></i></router-link>
-<button type="button" @click="hapus(o.id)" class="btn btn-danger btn-circle ml-1"><i class="fas fa-trash"></i></button>
+<router-link class="btn btn-warning btn-circle" :to="{ name : 'editoutlet' , params : { id : o.id_outlet } }"><i class="fas fa-pen"></i></router-link>
+<button type="button" @click="hapus(o.id_outlet)" class="btn btn-danger btn-circle ml-1"><i class="fas fa-trash"></i></button>
 </td>
 </tr>
 </tbody>
@@ -66,14 +66,14 @@ export default {
             this.$router.push('/') 
         }
         
-        this.axios.get('/outlet', { headers : { 'Authorization' : 'Bearer ' + this.$store.state.token} })
+        this.axios.get('http://localhost:8000/api/outlet', { headers : { 'Authorization' : 'Bearer ' + this.$store.state.token} })
                   .then( res => {
-                      this.outlet = res.data
+                      this.outlet = res.data.data
                   })
     },
     methods : {
         hapus(id) {
-            this.axios.delete(`/outlet/${id}`, { headers : { 'Authorization' : 'Bearer ' + this.$store.state.token} })
+            this.axios.delete(`http://localhost:8000/api/outlet/${id}`, { headers : { 'Authorization' : 'Bearer ' + this.$store.state.token} })
                       .then( () => {
                           let i = this.outlet.map(item => item.id).indexOf(id);
                           this.outlet.splice(i, 1);

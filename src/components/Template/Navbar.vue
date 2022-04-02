@@ -7,8 +7,8 @@
                         <li class="nav-item mt-1"><strong>{{ nama_outlet }}</strong></li>
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <li class="nav-item">
-                            <button class="btn btn-sm btn-warning btn-icon-split" @click="logout">
-                                <span class="icon text-white-50">
+                            <button class="btn btn-sm btn-info btn-icon-split" @click="logout">
+                                <span class="icon text-black-50">
                                     <i class="fas fa-sign-out-alt"></i>
                                 </span>
                                 <span class="text">Logout</span>
@@ -28,11 +28,11 @@ export default {
             }
         },
         created() {
-        var data = JSON.parse(this.$store.state.dataoutlet)
-        var namaoutlet = data.nama
+        var data = JSON.parse(this.$store.state.datauser)
+        var namaoutlet = data.nama_outlet
         this.nama_outlet = namaoutlet
         
-        this.axios.get('/login/check', {headers : {'Authorization' : 'Bearer ' + this.$store.state.token }})
+        this.axios.get('http://localhost:8000/api/login/check', {headers : {'Authorization' : 'Bearer ' + this.$store.state.token }})
             .then((res) => {
             if(!(res.data.success)) {
                 this.$store.commit('clearToken')
@@ -44,7 +44,7 @@ export default {
     },    
     methods : {
         logout() {
-            this.axios.post('/logout', { headers : { 'Authorization' : 'Bearer ' + this.$store.state.token} })
+            this.axios.post('http://localhost:8000/api/logout', { headers : { 'Authorization' : 'Bearer ' + this.$store.state.token} })
                       .then( () => {
                           this.$store.commit('clearToken');
                           this.$store.commit('clearUser');

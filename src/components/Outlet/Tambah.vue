@@ -15,7 +15,7 @@
 <form @submit.prevent="tambah">
 <div class="form-group">
 <label>Nama Outlet</label>
-<input type="text" class="form-control" v-model="outlet.nama">
+<input type="text" class="form-control" v-model="outlet.nama_outlet">
 </div>
 <div class="form-group">
 <label>Alamat</label>
@@ -52,7 +52,7 @@ export default {
     },
     methods : {
         tambah() {
-            this.axios.post('/outlet', this.outlet, { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} })
+            this.axios.post('http://localhost:8000/api/outlet', this.outlet, { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} })
                       .then( () => {
                           this.$router.push('/outlet');
                       })

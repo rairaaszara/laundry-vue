@@ -37,7 +37,7 @@
                                         <div class="form-group">
                                             <label>Outlet</label>
                                             <select class="form-control" v-model="user.id_outlet">
-                                                <option v-for="(o, index) in outlet" :key="index" :value="o.id">{{ o.nama }}</option>
+                                                <option v-for="(o, index) in outlet" :key="index" :value="o.id_outlet">{{ o.nama_outlet }}</option>
                                             </select>                                            
                                         </div>
                                         <button type="submit" class="btn btn-success btn-block">Simpan</button>
@@ -70,15 +70,15 @@ export default {
             this.$router.push('/') 
         }
         
-        this.axios.get('/outlet', { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} })
+        this.axios.get('http://localhost:8000/api/outlet', { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} })
                   .then(res => {
-                      this.outlet = res.data
+                      this.outlet = res.data.data
                   })
                   .catch(err => console.log(err))
     },
     methods : {
         tambah() {
-            this.axios.post('/user', this.user, { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} })
+            this.axios.post('http://localhost:8000/api/user', this.user, { headers : { 'Authorization' : `Bearer ` + this.$store.state.token} })
                       .then( (res) => {
                           if(res.data.success) {
                               this.$swal("Sukses", res.data.message, "success")

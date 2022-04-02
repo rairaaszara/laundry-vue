@@ -26,6 +26,7 @@
 <th>Alamat</th>
 <th>Jenis Kelamin</th>
 <th>No Telfon</th>
+<th>Aksi</th>
 </tr>
 </thead>
 <tbody>
@@ -87,15 +88,32 @@ export default {
     },
     methods : {
     hapus(id_member) {
+    this.$swal.fire({
+                title : 'Anda yakin ingin menghapus data?',
+                icon : 'warning',
+                showCancelButton : true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal'
+            }).then((res) => {
+                if(res.value) {    
     this.axios.delete(`http://localhost:8000/api/member/${id_member}`,
-    {
-        headers : { Authorization : 'Bearer ' + this.$store.state.token}
+    { headers : { 'Authorization' : 'Bearer ' + this.$store.state.token}
     })
-    .then(() => {
+    .then( (res) => {
+        if(res.data.success) {
         let i = this.member.map(item => item.id_member).indexOf(id_member)
         this.member.splice(i, 1)
-    });
-},
-},
-};
+        this.$swal("Sukses", res.data.message, "success")
+    }
+})
+.catch(() => {
+    this.$swal("Gagal", "Gagal menghapus data member", "error")
+})
+                }
+})
+}
+}
+}
 </script>

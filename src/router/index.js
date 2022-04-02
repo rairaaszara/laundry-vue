@@ -3,12 +3,12 @@ import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import Dashboard from '../components/Dashboard.vue'
 
-//USER
+//user
 import IndexUser from '../components/User/Index.vue'
 import TambahUser from '../components/User/Tambah.vue'
 import EditUser from '../components/User/Edit.vue'
 
-//OUTLET
+//outlet
 import IndexOutlet from '../components/Outlet/Index.vue'
 import TambahOutlet from '../components/Outlet/Tambah.vue'
 import EditOutlet from '../components/Outlet/Edit.vue'
@@ -26,10 +26,10 @@ import EditPaket from '../components/Paket/Edit.vue'
 //transaksi
 import IndexTransaksi from '../components/Transaksi/Index.vue'
 import TambahTransaksi from '../components/Transaksi/Tambah.vue'
-import EditTransaksi from '../components/Transaksi/Edit.vue'
 import DetailTransaksi from '../components/Transaksi/Detail.vue'
 import TambahDetail from '../components/Transaksi/TambahDetail.vue'
 
+//report
 import IndexReport from '../components/Report/Index.vue'
 
 Vue.use(VueRouter)
@@ -136,14 +136,6 @@ const routes = [
             requiresAuth : true
         }
     },
-    // {
-    //     path: '/paket/tambah',
-    //     name: 'tambahpaket',
-    //     component: TambahPaket,
-    //     meta : {
-    //         requiresAuth : true
-    //     }
-    // },
     {
         path: '/paket/edit/:id',
         name: 'editpaket',
@@ -152,14 +144,6 @@ const routes = [
             requiresAuth : true
         }
     },
-    // {
-    //     path: '/paket/detail/:id',
-    //     name: 'detailpaket',
-    //     component: DetailPaket,
-    //     meta : {
-    //         requiresAuth : true
-    //     }
-    // },
     {
         path: '/transaksi',
         name: 'indextransaksi',
@@ -172,14 +156,6 @@ const routes = [
         path: '/transaksi/tambah',
         name: 'tambahtransaksi',
         component: TambahTransaksi,
-        meta : {
-            requiresAuth : true
-        }
-    },
-    {
-        path: '/transaksi/edit/:id',
-        name: 'edittransaksi',
-        component: EditTransaksi,
         meta : {
             requiresAuth : true
         }

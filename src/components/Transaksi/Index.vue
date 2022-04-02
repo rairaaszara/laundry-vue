@@ -24,15 +24,17 @@
 <th>Nama Member</th>
 <th>Tanggal Order</th>
 <th>Status</th>
+<th>Dibayar</th>
 <th>Petugas</th>
 <th>Aksi</th>
 </tr>
 </thead>
 <tbody>
 <tr v-for="(t, index) in transaksi" :key="index">
-<td>{{ index+1 }}</td>
+<td>{{ index + 1 }}</td>
 <td>{{ t.nama }}</td>
 <td>{{ t.tanggal | moment("DD/MM/YYYY") }}</td>
+
 <td>
 <span v-if="t.status == 'baru'" class="badge bg-info text-light">Baru</span>
 <span v-if="t.status == 'proses'" class="badge bg-warning text-dark">Proses</span>
@@ -40,11 +42,13 @@
 <span v-if="t.status == 'diambil'" class="badge bg-secondary text-light">Diambil</span>
 </td>
 <td>
+<span v-if="t.dibayar == 'dibayar'" class="badge bg-info text-light">Di Bayar</span>
+<span v-if="t.dibayar == 'belum_dibayar'" class="badge bg-warning text-dark">Belum Dibayar</span>
+</td>
+<td>{{ t.name }}</td>
+<td>
 <router-link class="btn btn-success btn-circle mr-1" :to="{ name : 'detailtransaksi', params : {id : t.id_transaksi}}">
 <i class="far fa-eye"></i>
-</router-link>
-<router-link class="btn btn-warning btn-circle mr-1" :to="{ name : 'edittransaksi', params : {id : t.id_transaksi}}">
-<i class="fas fa-pen"></i>
 </router-link>
 </td>
 </tr>
@@ -81,6 +85,7 @@ export default {
 
     this.axios.get('http://localhost:8000/api/transaksi', {headers : { Authorization : 'Bearer ' + this.$store.state.token}})
     .then(res => {
+        console.log(res.data)
         this.transaksi = res.data
     })
 

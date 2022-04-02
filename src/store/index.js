@@ -4,7 +4,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 state: {
 token : localStorage.getItem('auth') || '',
-datauser : localStorage.getItem('user') || ''
+datauser : localStorage.getItem('user') || '',
+dataoutlet : localStorage.getItem('outlet')||''
 },
 mutations: {
     setToken(state, token) {
@@ -15,6 +16,10 @@ mutations: {
     localStorage.setItem('user', data)
     state.datauser = data
     },
+     setOutlet(state, data) {
+          localStorage.setItem('outlet', data)
+          state.dataoutlet = data
+        },
     clearToken(state) {
     localStorage.removeItem('auth')
     state.token = ''

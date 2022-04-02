@@ -33,7 +33,7 @@
                                                     <td>{{ index + 1 }}</td>
                                                     <td>{{ u.name }}</td>
                                                     <td>{{ u.role }}</td>
-                                                    <td>{{ u.nama }}</td>
+                                                    <td>{{ u.nama_outlet }}</td>
                                                     <td>
                                                        <router-link class="btn btn-warning btn-circle" :to="{ name : 'edituser' , params : { id : u.id } }"><i class="fas fa-pen"></i></router-link>
                                                        <button type="button" @click="hapus(u.id)" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></button>

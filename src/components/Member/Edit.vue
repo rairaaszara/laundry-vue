@@ -86,7 +86,8 @@ edit() {
     this.axios.put(`http://localhost:8000/api/member/${this.$route.params.id}`,
     this.member,
     {headers : {Authorization : 'Bearer ' + this.$store.state.token } })
-    .then(() => {
+    .then((res) => {
+        this.$swal("Sukses", res.data.message, "success")
         this.$router.push('/member')
     })
     .catch(err => console.log(err))

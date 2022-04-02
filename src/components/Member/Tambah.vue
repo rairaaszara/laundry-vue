@@ -69,18 +69,18 @@ export default {
             this.$router.push('/')
         }
 
-        
+    
     this.axios.get(`http://localhost:8000/api/member/${this.$route.params.id}`,
     { headers : {Authorization : 'Bearer ' + this.$store.state.token } })
     .then((res) => {
-        this.member = res.data.data.member
+        this.member = res.data
     })
 },
     methods : {
     tambah() {
     this.axios.post('http://localhost:8000/api/member',
     this.member,
-    { headers : { Authorization : `Bearer ` + this.$store.state.token} })
+    { headers : { Authorization : 'Bearer ' + this.$store.state.token} })
     .then((res) => {
         if(res.data.success) {
             this.$swal("Sukses", res.data.message, "success")

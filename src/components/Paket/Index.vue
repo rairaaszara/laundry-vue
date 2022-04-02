@@ -29,9 +29,6 @@
 <router-link :to="{ name : 'editpaket' , params : {id : p.id_paket }}" class="btn btn-warning btn-circle">
 <i class="fas fa-pen"></i>
 </router-link>
-<button type="button" @click="hapus(p.id_paket)" class="btn btn-danger btn-circle">
-<i class="fas fa-trash"></i>
-</button>
 </td>
 </tr>
 </tbody>
@@ -73,16 +70,6 @@ export default {
     })
     },
     methods : {
-    hapus(id_paket) {
-    this.axios.delete(`http://localhost:8000/api/paket/${id_paket}`,
-    {
-        headers : { Authorization : 'Bearer ' + this.$store.state.token}
-    })
-    .then( () => {
-        let i = this.paket.map(item => item.id_paket).indexOf(id_paket)
-        this.paket.splice(i, 1)
-    })
-}
     }
 }
 </script>
